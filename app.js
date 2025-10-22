@@ -277,7 +277,6 @@ document.getElementById('btnSave').addEventListener('click', () => {
   const list = loadHistory(); list.unshift(entry); localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0,200)));
   const low = Object.keys(state).filter(k => (state[k].score||0) < LOW_THRESHOLD);
   let html = `<div class="notice-green"><strong>Guardado:</strong> "${name}" — Calificación final: <strong>${calc.overall} / 5</strong>.`;
-  if(low.length){ html += `<div style="margin-top:10px"><ul>`; low.forEach(k => html += `<li><strong>${k}</strong>: puntuación ${(state[k].score||0).toFixed(1)}.</li>`); html += `</ul></div>`; } else html += `<div style="margin-top:10px">No se detectan criterios críticos.</div>`;
   html += `</div>`; notice.innerHTML = html;
   if(!document.getElementById('page-historial').classList.contains('hidden')) renderHistory();
 });
