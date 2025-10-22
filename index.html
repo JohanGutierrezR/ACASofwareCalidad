@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ACA Calidad de Software — Información Mejorada</title>
+  <link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar fixed-header">
+    <div class="brand">ACA Calidad de Software</div>
+    <nav class="mainnav">
+      <button data-route="info" class="navbtn active">Información</button>
+      <button data-route="evaluador" class="navbtn">Evaluación</button>
+      <button data-route="historial" class="navbtn">Historial</button>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- INFORMACIÓN (orden solicitado) -->
+    <section id="page-info" class="page">
+      <div class="card">
+        <!-- 1) ¿Qué es la Calidad de Software? -->
+        <h1>¿Qué es la Calidad de Software?</h1>
+        <p class="muted lead">
+          La calidad de software es el grado en que un producto satisface requisitos funcionales y no funcionales,
+          y cumple expectativas de rendimiento, seguridad, mantenibilidad y experiencia de usuario. En entornos educativos
+          la calidad asegura continuidad del aprendizaje, accesibilidad y confianza en la plataforma.
+        </p>
+
+        <!-- 2) Imagen full-width oscurecida con overlay "Medir para mejorar" -->
+        <div class="hero-full">
+          <img src="img/img_articulo1_fundamentos_calidad_de_software_img2.jpg" alt="Medir para mejorar — imagen">
+          <div class="hero-overlay" aria-hidden="true">
+            <h2>Medir para mejorar</h2>
+            <p>Medir con métricas claras permite identificar debilidades, priorizar correcciones y demostrar mejoras. En educación,
+               estas mediciones protegen la experiencia de docentes y estudiantes y reducen riesgos operacionales.</p>
+          </div>
+        </div>
+
+        <!-- 3) Criterios de Evaluación: cuadro principal que encierra tarjetas -->
+        <div class="card section-box">
+          <h2>Criterios de Evaluación</h2>
+          <p class="small">A continuación se listan los criterios que utilizamos para evaluar un aplicativo educativo. Pase el cursor sobre cada tarjeta para ver el efecto visual (crece y resalta).</p>
+
+          <div class="criteria-wrapper">
+            <div id="criteriaGrid" class="criteria-grid">
+              <!-- tarjetas inyectadas por JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 4) Guía rápida / Métodos (debajo de criterios) -->
+        <div class="card">
+          <h3>Guía rápida — Métodos de evaluación</h3>
+          <div class="small">
+            <p><strong>Métodos combinados:</strong> inspección funcional (checklists), pruebas con usuarios (usabilidad), pruebas de carga (eficiencia),
+            revisión de seguridad y análisis estático del código (mantenibilidad).</p>
+            <p><strong>Ejemplo de pesos:</strong> Usabilidad, Seguridad, Funcionalidad = 15% cada una; Eficiencia, Mantenibilidad, Portabilidad, Fiabilidad, Compatibilidad = 10% cada una.</p>
+            <p class="code">Puntaje final = Σ (Valor del criterio × Peso asignado). La nota final va de 0 (mínimo) a 5 (máximo).</p>
+          </div>
+        </div>
+
+        <!-- 5) Documentación: descripciones generales de cada norma/modelo -->
+        <div class="card section-box">
+          <h3>Documentación (guías y estándares)</h3>
+          <p class="small">A continuación hay una breve descripción general de las normas y modelos que sustentan el análisis técnico y las pruebas. Pasa el cursor sobre cada entrada para resaltarla.</p>
+
+          <div id="docsList" class="docs-detailed">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EVALUADOR (no se toca la lógica en el HTML) -->
+    <section id="page-evaluador" class="page hidden">
+      <div class="card">
+        <h1>Evaluación</h1>
+        <div class="subtabs">
+          <button data-sub="metrics" class="subbtn active">Métricas</button>
+          <button data-sub="charts" class="subbtn">Gráficas</button>
+        </div>
+      </div>
+
+      <div id="sub-metrics" class="card">
+        <div class="row top-controls">
+          <div style="min-width:320px">
+            <label>Nombre del aplicativo <br>
+              <input id="appName" placeholder="Nombre del aplicativo educativo">
+            </label>
+            <div id="appNameError" class="field-error hidden">Escribe un nombre para identificar la evaluación (ej. "Edu Virtual").</div>
+          </div>
+           <div style="min-width:300px; flex:1;">
+            <label for="appDescription">Descripción <br>
+              <input id="appDescription" placeholder="Breve descripción del aplicativo">
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="btnGenerate">Generar resultado</button>
+            <button id="btnSave">Guardar</button>
+            <button id="btnPdf">Descargar PDF</button>
+            <button id="btnCsv" class="light">Descargar CSV</button>
+            <button id="btnReset" class="light">Reiniciar</button>
+          </div>
+        </div>
+
+        <div id="metricsGrid"></div>
+        <div id="saveNotice" class="notice-area"></div>
+        <div class="resultBox card hidden" id="resultBox">
+          <h3>Resumen detallado</h3>
+          <pre id="resultPreview" class="mono"></pre>
+        </div>
+      </div>
+
+      <div id="sub-charts" class="card hidden">
+        <h3>Gráficas</h3>
+        <div class="charts-row">
+          <div class="chart-card"><canvas id="barChart"></canvas></div>
+          <div class="chart-card small-card"><canvas id="pieChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORIAL -->
+    <section id="page-historial" class="page hidden">
+      <div class="card">
+        <h1>Historial de Evaluaciones</h1>
+        <div class="card small">
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input id="filterName" placeholder="Buscar por nombre...">
+            <input id="filterMin" type="number" placeholder="Puntaje mínimo" min="0" max="5" step="0.1">
+            <input id="filterMax" type="number" placeholder="Puntaje máximo" min="0" max="5" step="0.1">
+            <button id="applyFilters" class="light">Aplicar filtros</button>
+            <button id="clearFilters" class="light">Limpiar</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <table id="historyTable">
+            <thead><tr><th>Aplicación</th><th>Resultado</th><th>Fecha</th><th>Hora</th><th>Ver</th><th>Eliminar</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">ACA Calidad de Software</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+:root{
+  --accent:#0b94a6;
+  --accent-dark:#086b72;
+  --muted:#5f6b6b;
+  --card:#fff;
+  --bg:#f6fdfe;
+  --radius:12px;
+  --danger:#d9534f;
+  --good:#2f9d57;
+  --subtab-inactive:#e9fbfb;
+  --crit-color-1:#e7f9f1;
+  --crit-color-2:#f1fffa;
+  --doc-hover:#d9f1f8; /* color de fondo al pasar mouse en doc */
+  --doc-link:#0a4f6b;  /* azul oscuro para links/textos */
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#053232}
+.topbar{background:var(--accent);color:#fff;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(5,20,20,0.08)}
+.brand{font-weight:800}
+.container{max-width:1150px;margin:20px auto;padding:0 18px}
+.card{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(6,20,20,0.06);margin-bottom:14px}
+.lead{font-size:1.02rem;color:var(--muted)}
+
+/* TITULOS AZULES */
+.card h2, .card h3 {
+  color: var(--accent);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* HERO FULL (Medir para mejorar) */
+/* Ajustes: ligero blur en hover, pero manteniendo nitidez al volver */
+.hero-full{
+  position:relative;
+  border-radius:10px;
+  overflow:hidden;
+  margin:12px 0;
+  transition:transform .28s ease;
+  will-change: transform;
+}
+.hero-full img{
+  width:100%;
+  height:420px;
+  object-fit:cover;
+  display:block;
+  filter:brightness(45%);               /* mantengo oscuridad */
+  transition:transform .28s ease, filter .28s ease, opacity .28s ease;
+  backface-visibility:hidden;           /* reduce artefactos */
+  -webkit-backface-visibility:hidden;
+  transform:translateZ(0);              /* mejora render */
+  image-rendering: auto;
+}
+.hero-full:hover{
+  transform:scale(1.02);
+}
+.hero-full:hover img{
+  transform:scale(1.05);
+  /* ligero desenfoque para efecto suave (no exagerado) */
+  filter:brightness(45%) saturate(1.03) blur(0.6px);
+  -webkit-filter:brightness(45%) saturate(1.03) blur(0.6px);
+}
+
+/* overlay (texto) — mantengo tamaño grande y legible */
+.hero-overlay{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  color:#fff;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  max-width:880px;
+  background:rgba(0,0,0,0.32);
+  box-shadow:0 12px 30px rgba(0,0,0,0.35);
+}
+.hero-overlay h2{
+  margin:0 0 10px;
+  font-size:2.3rem;
+  letter-spacing:1px;
+  transition:transform .28s ease;
+}
+.hero-overlay p{
+  margin:0;
+  color:rgba(255,255,255,0.95);
+  font-size:1.15rem;
+  line-height:1.45;
+}
+
+/* CRITERIOS DE EVALUACIÓN */
+.section-box{
+  border:1px solid #e6f7f7;
+  background:linear-gradient(180deg,#fff,#fbffff);
+  padding:16px;
+}
+.criteria-wrapper{padding-top:8px}
+.criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:760px){ .criteria-grid{grid-template-columns:1fr} }
+
+.crit-card{
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #eef9f9;
+  background:linear-gradient(180deg,var(--crit-color-1),var(--crit-color-2));
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  cursor:pointer;
+}
+.crit-card .title{font-weight:800;color:#053232;margin-bottom:8px}
+.crit-card .desc{color:var(--muted);font-size:0.95rem}
+.crit-card:hover{
+  transform: translateY(-8px) scale(1.06);
+  box-shadow:0 22px 52px rgba(3,60,60,0.18);
+  border-color: rgba(11,148,166,0.45);
+}
+
+/* DOCUMENTACIÓN: hover visible + texto azul oscuro */
+.docs-detailed {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* Contenedor de cada documento */
+.doc-item {
+  padding: 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #fff, #f8fffe);
+  border: 1px solid #e4f6f8;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: transform 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+  cursor: default;
+}
+
+/* --- Documentación --- */
+.documentation-section {
+  background-color: #f8faff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.documentation-section h2 {
+  color: #0056b3; /* Azul superior */
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+#docs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.doc-link {
+  color: #003366; /* Azul oscuro */
+  font-weight: 600; /* Negrita */
+  text-decoration: none;
+  background: rgba(0, 86, 179, 0.05);
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer; /* cambia el cursor */
+}
+
+.doc-link:hover {
+  background: rgba(0, 86, 179, 0.15); /* Efecto al pasar el mouse */
+  color: #002244; /* Azul más intenso */
+  transform: translateX(5px);
+}
+
+
+
+/* SUBTABS */
+.subtabs{display:flex;gap:8px;margin-bottom:10px}
+.subbtn{background:var(--subtab-inactive);border:1px solid #dff4f4;padding:8px 12px;border-radius:10px;cursor:pointer;color:#04595a}
+.subbtn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* RESTO (sin cambios funcionales) */
+.top-controls{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.top-controls input{padding:8px;border-radius:8px;border:1px solid #e3f0f1;width:260px}
+.actions{display:flex;gap:8px}
+button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer;box-shadow:0 6px 12px rgba(6,20,20,0.04)}
+/*button.light{background:#fff;color:var(--accent);border:1px solid:#cfeff1}*/
+
+#metricsGrid{display:grid;gap:10px;margin-top:12px}
+.metricRow{display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;border:1px solid #eef8f8;background:linear-gradient(180deg,#fbffff,#f7fbfb)}
+.metricRow .label{width:170px;font-weight:700;color:#054a4b}
+.metricRow .slider{flex:1}
+.metricRow .value{width:50px;text-align:right;font-weight:700}
+.metricRow input[type="range"]{width:100%}
+.metricRow input[type="number"]{width:86px;padding:6px;border-radius:6px;border:1px}
+
+.notice-area{margin-top:12px}
+.notice-green{background:#e9f7ec;border-left:6px solid var(--good);padding:14px;border-radius:8px;color:#0b5e35}
+.notice-red{background:#fdecea;border-left:6px solid var(--danger);padding:14px;border-radius:8px;color:#7a2b2b}
+.field-error{color:var(--danger);margin-top:6px;font-size:0.95rem}
+.input-error{border:2px solid var(--danger) !important; box-shadow:0 2px 12px rgba(217,83,79,0.12)}
+.criteria-low{color:var(--danger);font-weight:700}
+
+.charts-row{display:flex;gap:12px;flex-wrap:wrap}
+.chart-card{flex:1;min-width:300px;padding:12px;border-radius:8px;background:linear-gradient(180deg,#ffffff,#f8fffd);box-shadow:0 8px 20px rgba(5,20,20,0.04)}
+.small-card{width:300px}
+
+.resultBox .mono{background:#f7ffff;border:1px solid #e6f6f7;padding:10px;border-radius:8px;white-space:pre-wrap;font-family:monospace}
+
+.hidden{display:none}
+.muted{color:var(--muted)}
+.footer{max-width:1150px;margin:12px auto;padding:8px 18px;color:var(--muted);font-size:0.9rem}
+table{width:100%;border-collapse:collapse}
+table th, table td{padding:8px;border-bottom:1px solid #eef7f7;text-align:left}
+
+/* cabecera fija: ocupa todo el ancho y no interfiere con el scroll */
+.fixed-header, .topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent));
+  color: #fff;
+  z-index: 1100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+/* cambio suave cuando se hace scroll (clase .scrolled aplicada por JS) */
+.fixed-header.scrolled {
+  background: linear-gradient(90deg, #075f64, var(--accent));
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+}
+
+/* marca y nav */
+.brand { font-size:1.2rem; font-weight:800; color:#fff }
+
+/* contenedor de navegación (alineación) */
+.mainnav { display:flex; gap:14px; align-items:center }
+
+/* BOTONES / PESTAÑAS: mejor contraste y comportamiento accesible */
+.navbtn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.95);
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
+  outline: none;
+}
+
+/* hover: fondo sutil claro para que el texto siga legible */
+.navbtn:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* estado activo: fondo BLANCO y texto en color principal (mejor contraste) */
+.navbtn.active {
+  background: #ffffff;
+  color: var(--accent-dark);
+  box-shadow: 0 4px 12px rgba(5,20,20,0.06);
+}
+
+/* subrayado animado (opcional, usa color del sitio) */
+.navbtn::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -6px;
+  height: 3px;
+  width: 0%;
+  background: transparent;
+  transition: width 0.28s ease, background 0.28s ease;
+}
+.navbtn:hover::after { width: 80%; background: rgba(255,255,255,0.18); }
+.navbtn.active::after { width: 80%; background: var(--accent); }
+
+/* evitar que la cabecera afecte el scroll: espacio superior en body */
+body {
+  padding-top: 64px; /* ajusta si tu header cambia de altura; evita contenido oculto */
+  min-height: 100vh;
+  overflow-y: auto; /* asegurar scroll por defecto */
+}
+
+/* asegurar que las páginas ocupen al menos la altura de la ventana (evita "salto" de scroll) */
+.page {
+  min-height: calc(100vh - 80px); /* reserva espacio para la cabecera fija */
+  box-sizing: border-box;
+  padding-top: 8px; /* separación interna para que no pegue al header */
+}
+
+/* si usas .hidden simplemente oculta el display sin afectar overflow del body */
+.hidden { display: none !important; }
+
+/* mejorar contraste del texto en la pestaña cuando está activa (si usas icons) */
+.navbtn:focus { box-shadow: 0 0 0 3px rgba(11,148,166,0.12); border-radius:8px; }
+
+/* Ajuste del layout superior */
+.top-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.input-group {
+  flex: 1;
+  min-width: 260px;
+}
+
+.input-group.wide {
+  flex: 2; /* hace que la descripción ocupe más espacio */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #e3f0f1;
+}
+
+/* Botones: todos del mismo color */
+button,
+button.light {
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(6, 20, 20, 0.04);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+button:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
