@@ -13,7 +13,7 @@ const METRICS = [
 ];
 
 const TOOL_URL_MAP = {
-    'Funcionalidad': 'https://www.postman.com/',
+    'Funcionalidad': 'https://www.woorank.com/',
     'Usabilidad': 'https://developer.chrome.com/docs/lighthouse/overview?hl=es-419',
     'Eficiencia': 'https://pagespeed.web.dev/', 
     'Mantenibilidad': 'https://validator.w3.org/',
