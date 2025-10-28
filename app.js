@@ -11,6 +11,18 @@ const METRICS = [
   { key: 'Fiabilidad', weight: 15 },
   { key: 'Compatibilidad', weight: 10 }
 ];
+
+const TOOL_URL_MAP = {
+    'Funcionalidad': 'https://www.postman.com/',
+    'Usabilidad': 'https://developer.chrome.com/docs/lighthouse/overview?hl=es-419',
+    'Eficiencia': 'https://pagespeed.web.dev/', 
+    'Mantenibilidad': 'https://validator.w3.org/',
+    'Portabilidad': 'https://www.browserling.com/',
+    'Seguridad': 'https://www.ssllabs.com/ssltest/',
+    'Fiabilidad': 'https://www.ssllabs.com/ssltest/',
+    'Compatibilidad': 'https://www.browserling.com/'
+};
+
 const LOW_THRESHOLD = 3.5;
 const STORAGE_KEY = 'aca_quality_history';
 
@@ -60,17 +72,29 @@ const docs = [
 ];
 
 function renderInfo(){
-  const grid = document.getElementById('criteriaGrid');
-  if(grid){
-    grid.innerHTML = '';
-    METRICS.forEach(m => {
-      const card = document.createElement('div');
-      card.className = 'crit-card';
-      card.innerHTML = `<div style="font-weight:800;margin-bottom:6px">${m.key}</div>
-                        <div class="comp-desc" style="color:var(--muted)">${briefDesc(m.key)}</div>`;
-      grid.appendChild(card);
-    });
-  }
+    const grid = document.getElementById('criteriaGrid');
+    if(grid){
+        grid.innerHTML = '';
+        METRICS.forEach(m => {
+            const url = TOOL_URL_MAP[m.key] || '#'; // Obtener la URL o usar '#' si no existe
+
+            const card = document.createElement('div');
+            card.className = 'crit-card';
+            
+            // AÑADIMOS la lógica de clic directamente al elemento
+            if (url !== '#') {
+                // Hacemos el card clicable y le damos el estilo de puntero
+                card.style.cursor = 'pointer'; 
+                card.onclick = () => window.open(url, '_blank', 'noopener');
+            }
+            
+            // El contenido del card sigue siendo el mismo:
+            card.innerHTML = `<div style="font-weight:800;margin-bottom:6px">${m.key}</div>
+                             <div class="comp-desc" style="color:var(--muted)">${briefDesc(m.key)}</div>`;
+            
+            grid.appendChild(card);
+        });
+    }
 
   const docsList = document.getElementById('docsList');
   if(docsList){

@@ -44,7 +44,7 @@
         <!-- 3) Criterios de Evaluación: cuadro principal que encierra tarjetas -->
         <div class="card section-box">
           <h2>Criterios de Evaluación</h2>
-          <p class="small">A continuación se listan los criterios que utilizamos para evaluar un aplicativo educativo. Pase el cursor sobre cada tarjeta para ver el efecto visual (crece y resalta).</p>
+          <p class="small">A continuación, se describen los criterios clave utilizados para evaluar la calidad y el rendimiento de la aplicación educativa. Cada criterio le permite enfocar sus esfuerzos en diferentes aspectos de la calidad del software.</p>
 
           <div class="criteria-wrapper">
             <div id="criteriaGrid" class="criteria-grid">
@@ -55,14 +55,30 @@
 
         <!-- 4) Guía rápida / Métodos (debajo de criterios) -->
         <div class="card">
-          <h3>Guía rápida — Métodos de evaluación</h3>
-          <div class="small">
-            <p><strong>Métodos combinados:</strong> inspección funcional (checklists), pruebas con usuarios (usabilidad), pruebas de carga (eficiencia),
-            revisión de seguridad y análisis estático del código (mantenibilidad).</p>
-            <p><strong>Ejemplo de pesos:</strong> Usabilidad, Seguridad, Funcionalidad = 15% cada una; Eficiencia, Mantenibilidad, Portabilidad, Fiabilidad, Compatibilidad = 10% cada una.</p>
-            <p class="code">Puntaje final = Σ (Valor del criterio × Peso asignado). La nota final va de 0 (mínimo) a 5 (máximo).</p>
-          </div>
-        </div>
+      <h3>Guía rápida — Métodos de evaluación</h3>
+      <div class="small">
+
+          <p><strong>INSTRUCCIÓN:</strong> Al seleccionar cada criterio se dirigirá a las herramientas y métodos de prueba asociados para la evaluación de la calidad de software.</p>
+
+          <p><strong>Criterios y Herramientas de Prueba Rápida:</strong></p>
+          <ul>
+              <li>Funcionalidad: Postman (Pruebas de APIs y back-end).</li>
+              <li>Usabilidad: Lighthouse (a través de DevTools para análisis de Accesibilidad y UX).</li>
+              <li>Eficiencia: PageSpeed Insights (Medición de velocidad y Core Web Vitals).</li>
+              <li>Mantenibilidad: W3C Markup Validation Service (Validación de código HTML).</li>
+              <li>Portabilidad: Browserling (Pruebas Cross-Browser).</li>
+              <li>Seguridad: SSL Labs Server Test (Evaluación de certificado SSL/TLS y configuración del servidor).</li>
+              <li>Fiabilidad: SSL Labs Server Test (Estabilidad del certificado y conexión HTTPS).</li>
+              <li>Compatibilidad: Browserling (Simulación de la aplicación en diferentes entornos).</li>
+          </ul>
+
+          <p><strong>Metodología de Pruebas:</strong> Se sugiere una combinación de inspección funcional (checklists), pruebas con usuarios (usabilidad), pruebas de carga (eficiencia), revisión de seguridad y análisis estático del código (mantenibilidad).</p>
+          
+          <p><strong>Asignación de pesos:</strong> La plataforma permite editar el peso (porcentaje) de cada criterio para personalizar la puntuación final según las prioridades del proyecto.</p>
+          
+          <p class="code">Puntaje final = &Sigma; (Valor del criterio &times; Peso asignado). La nota final va de 0 (mínimo) a 5 (máximo).</p>
+      </div>
+</div>
 
         <!-- 5) Documentación: descripciones generales de cada norma/modelo -->
         <div class="card section-box">
@@ -151,7 +167,7 @@
 
   </main>
 
-  <footer class="footer">ACA Calidad de Software</footer>
+  <footer class="footer">ACA Calidad de Software - Johan - Mauricio</footer>
 
   <script src="app.js"></script>
 </body>
